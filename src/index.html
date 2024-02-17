@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <script src="./jquery.min.js"></script>
+    <script src="./qrcode.js"></script>
+</head>
+
+<body class="bg-black" style="overflow-y: hidden;">
+    <div class=" flex w-full h-screen items-center justify-center flex-col">
+        <h1 class="text-white text-center text-2xl font-semibold pb-10" id="demo">QRCode Generator</h1>
+        <input type="text" id="text" placeholder="eg.salmanalfarizq.eu.org" class="w-60 h-10 bg-white mt-5 rounded-md border-2 border-white mb-5 focus:outline-none px-2" />
+        <div class="border-gray-400 w-60 h-60 border-2 rounded-xl bg" id="qrcode"></div>
+        <button class="w-60 h-10 bg-white mt-5 rounded-md border-2 border-white hover:bg-black hover:text-white duration-500" onclick="makeCode()">generate</button>
+        <p class="text-white mt-5">Click Generate Or Enter to generate your QRCode</p>
+    </div>
+</body>
+
+<script>
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width: 240,
+        height: 240
+    });
+
+    function makeCode() {
+        var elText = document.getElementById("text");
+
+        if (!elText.value) {
+            alert("Input a text");
+            elText.focus();
+            return;
+        }
+
+        qrcode.makeCode(elText.value);
+    }
+
+    // makeCode();
+
+    $("#text").
+    on("keydown", function(e) {
+        if (e.keyCode == 13) {
+            makeCode();
+        }
+    });
+</script>
+
+</html>
